@@ -1,0 +1,26 @@
+<h2 class="f1">Contents</h2>
+<nav>
+  <ul class="f3 ml-3">
+    <%= for item <- @repos do %>
+      <li><a href=<%= "#" <> item.id %>><%= item.name %></a></li>
+    <% end %>
+  </ul>
+</nav>
+
+<%= for item <- @repos do %>
+  <h2 class="mt-5 f1" id=<%= item.id %>><%= item.name %></h2>
+  <p class="m-0 f3"><%= item.description %></p>
+  <ul class="f3 mt-3">
+    <%= for repo <- item.repos do %>
+      <%= if period_in_days(Map.get(repo, :last_update)) > 365 do %>
+        <li class="text-gray-light f4">
+          <a class="text-gray-light" href=<%= repo.url %>><%= repo.name %></a><%= display_stars(repo) %><%= display_days(repo) %> - <span><%= display_description(repo) %></span>
+        </li>
+      <% else %>
+        <li>
+          <a href=<%= repo.url %>><%= repo.name %></a><%= display_stars(repo) %><%= display_days(repo) %> - <span><%= display_description(repo) %></span>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

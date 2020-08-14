@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" class="height-full">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag assigns[:page_title] || "AwesomeElixir", suffix: " · Phoenix Framework" %>
+    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </head>
+  <body class="d-flex flex-column">
+    <header>
+      <div class="col-12 col-md-8 col-xl-4 p-2 mx-auto">
+        <h1 class="h1"><%= gettext "Awesome Elixir" %></h1>
+        <nav class="f4 mt-2">
+          <a href="/">All</a>
+          <a href="?min=stars=10" class="ml-2">≥10⭐</a>
+          <a href="?min=stars=50" class="ml-2">≥50⭐</a>
+          <a href="?min=stars=100" class="ml-2">≥100⭐</a>
+          <a href="?min=stars=500" class="ml-2">≥500⭐</a>
+          <a href="?min=stars=1000" class="ml-2">≥1000🌟</a>
+        </nav>
+        <p class="f4 mt-2">Elixir is awesome. And it has a vast awesome list: <a href="https://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a>. This is a mirror of it where each library is marked with number of stars at <a href="https://github.com">Github</a> and number of days since the last commit.</p>
+      </div>
+    </header>
+    <%= @inner_content %>
+    <footer class="p-5">
+      <div class="col-12 col-md-8 col-xl-4 p-2 mx-auto">
+        <p class="text-gray-light text-center f5">Yuri Suleymanov © 2020</p>
+      </div>
+    </footer>
+  </body>
+</html>
