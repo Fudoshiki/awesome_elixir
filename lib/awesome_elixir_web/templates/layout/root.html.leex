@@ -14,12 +14,12 @@
       <div class="col-12 col-md-8 col-xl-4 p-2 mx-auto">
         <h1 class="h1"><%= gettext "Awesome Elixir" %></h1>
         <nav class="f4 mt-2">
-          <a href="/">All</a>
-          <a href="?min_stars=10" class="ml-2">≥10⭐</a>
-          <a href="?min_stars=50" class="ml-2">≥50⭐</a>
-          <a href="?min_stars=100" class="ml-2">≥100⭐</a>
-          <a href="?min_stars=500" class="ml-2">≥500⭐</a>
-          <a href="?min_stars=1000" class="ml-2">≥1000🌟</a>
+          <%= live_redirect "All", to: Routes.page_path(@conn, :index) %>
+          <%= live_redirect "≥10⭐", to: Routes.page_path(@conn, :index, min_stars: 10), class: "ml-2" %>
+          <%= live_redirect "≥50⭐", to: Routes.page_path(@conn, :index, min_stars: 50), class: "ml-2" %>
+          <%= live_redirect "≥100⭐", to: Routes.page_path(@conn, :index, min_stars: 100), class: "ml-2" %>
+          <%= live_redirect "≥500⭐", to: Routes.page_path(@conn, :index, min_stars: 500), class: "ml-2" %>
+          <%= live_redirect "≥1000🌟", to: Routes.page_path(@conn, :index, min_stars: 1000), class: "ml-2" %>
         </nav>
         <p class="f4 mt-2">Elixir is awesome. And it has a vast awesome list: <a href="https://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a>. This is a mirror of it where each library is marked with number of stars at <a href="https://github.com">Github</a> and number of days since the last commit.</p>
       </div>

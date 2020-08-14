@@ -13,6 +13,6 @@ defmodule AwesomeElixirWeb.Router do
   scope "/", AwesomeElixirWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index, container: {:main, class: "flex-1 mt-4"}
+    live "/", PageLive, :index, as: :page, container: {:main, class: "flex-1 mt-4"}
   end
 end
