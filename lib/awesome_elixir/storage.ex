@@ -7,11 +7,11 @@ defmodule AwesomeElixir.Storage do
   end
 
   def subscribe do
-    Phoenix.PubSub.subscribe(AwesomeElixir.PubSub, "data")
+    Phoenix.PubSub.subscribe(AwesomeElixir.PubSub, "storage")
   end
 
   def broadcast_update do
-    Phoenix.PubSub.broadcast(AwesomeElixir.PubSub, "data", "update")
+    Phoenix.PubSub.broadcast(AwesomeElixir.PubSub, "storage", "update")
   end
 
   def insert_repos(list) do

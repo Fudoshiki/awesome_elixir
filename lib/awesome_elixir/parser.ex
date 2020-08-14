@@ -35,15 +35,24 @@ defmodule AwesomeElixir.Parser do
     case HTTPoison.get(awesome_repo_url) do
       {:ok, %{body: raw, status_code: 200}} ->
         content = String.split(raw, "\n")
-
         {_stage, list} = Enum.reduce(content, {}, fn line, result -> parse_line(line, result) end)
-        Storage.insert_repos(list)
 
+        Storage.insert_repos(list)
         update_repos(list)
 
       {:error, _error} ->
         nil
     end
+  end
+
+  defp github_api_request(repository) do
+    headers =
+      case Application.get_env(:awesome_elixir, :github_auth_token) do
+        nil -> []
+        auth_token -> [{"Authorization", "token #{auth_token}"}]
+      end
+
+    Tesla.get("https://api.github.com/repos/" <> repository, headers: headers)
   end
 
   defp parse_line("- [Awesome Elixir](#awesome-elixir)", _result), do: {:awesome, []}
@@ -109,21 +118,20 @@ defmodule AwesomeElixir.Parser do
     regex = ~r/https:\/\/github.com\/(?<repository>.+)/
     url = new_url || repo.url
 
-    with true <- String.starts_with?(url, "https://github.com"),
-         %{"repository" => repository} <- Regex.named_captures(regex, url) do
-      case Tesla.get("https://api.github.com/repos/" <> repository,
-             headers: [{"Authorization", "token 32ad212c062c9ae7a79dd545e4ea81104f2cde51"}]
-           ) do
+    if String.starts_with?(url, "https://github.com") do
+      %{"repository" => repository} = Regex.named_captures(regex, url)
+
+      case github_api_request(repository) do
         {:ok, %{body: raw_json, status: 200}} ->
-          %{"pushed_at" => last_update, "stargazers_count" => stars} = Jason.decode!(raw_json)
+          %{"pushed_at" => date, "stargazers_count" => stars_count} = Jason.decode!(raw_json)
 
           Enum.map(list, fn item ->
             if item.name == name do
               repos =
                 Enum.map(item.repos, fn r ->
                   if r.url == repo.url do
-                    Map.put(r, :stars, stars)
-                    |> Map.put(:last_update, last_update)
+                    Map.put(r, :stars, stars_count)
+                    |> Map.put(:last_update, date)
                   else
                     r
                   end
@@ -149,8 +157,7 @@ defmodule AwesomeElixir.Parser do
           list
       end
     else
-      _ ->
-        list
+      list
     end
   end
 
