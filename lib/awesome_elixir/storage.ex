@@ -1,8 +1,39 @@
 defmodule AwesomeElixir.Storage do
+  def get_repos(%{"min_stars" => stars}) do
+    stars_count =
+      case Integer.parse(stars) do
+        {int, _} -> int
+        _ -> 0
+      end
+
+    case :ets.lookup(:awesome_elixir, :list) do
+      [{:list, list}] -> list
+      result -> result
+    end
+    |> Enum.reduce([], fn item, list ->
+      repos =
+        Enum.filter(item.repos, fn repo ->
+          case Map.get(repo, :stars) do
+            nil -> false
+            stars -> stars >= stars_count
+          end
+        end)
+
+      if length(repos) > 0 do
+        item = Map.put(item, :repos, repos)
+        list ++ [item]
+      else
+        list
+      end
+    end)
+  end
+
+  def get_repos(_), do: get_repos()
+
   def get_repos do
     case :ets.lookup(:awesome_elixir, :list) do
       [{:list, list}] -> list
-      _ -> []
+      result -> result
     end
   end
 
