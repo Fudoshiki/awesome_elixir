@@ -5,6 +5,7 @@
   "cowlib": {:hex, :cowlib, "2.9.1", "61a6c7c50cf07fdd24b2f45b89500bb93b6686579b069a89f88cb211e1125c78", [:rebar3], [], "hexpm", "e4175dc240a70d996156160891e1c62238ede1729e45740bdd38064dad476170"},
   "earmark": {:hex, :earmark, "1.4.10", "bddce5e8ea37712a5bfb01541be8ba57d3b171d3fa4f80a0be9bcf1db417bcaf", [:mix], [{:earmark_parser, ">= 1.4.10", [hex: :earmark_parser, repo: "hexpm", optional: false]}], "hexpm", "12dbfa80810478e521d3ffb941ad9fbfcbbd7debe94e1341b4c4a1b2411c1c27"},
   "earmark_parser": {:hex, :earmark_parser, "1.4.10", "6603d7a603b9c18d3d20db69921527f82ef09990885ed7525003c7fe7dc86c56", [:mix], [], "hexpm", "8e2d5370b732385db2c9b22215c3f59c84ac7dda7ed7e544d7c459496ae519c0"},
+  "faker": {:hex, :faker, "0.14.0", "203c586aba7e36567e01e5e786763baf8ce1be4642a96b19ad6d7245976eb973", [:mix], [], "hexpm", "492f8f0e80668e5217ad7eb8519be7640cda29e014fc8763f2e46844edeaa989"},
   "file_system": {:hex, :file_system, "0.2.8", "f632bd287927a1eed2b718f22af727c5aeaccc9a98d8c2bd7bff709e851dc986", [:mix], [], "hexpm", "97a3b6f8d63ef53bd0113070102db2ce05352ecf0d25390eb8d747c2bde98bca"},
   "floki": {:hex, :floki, "0.27.0", "6b29a14283f1e2e8fad824bc930eaa9477c462022075df6bea8f0ad811c13599", [:mix], [{:html_entities, "~> 0.5.0", [hex: :html_entities, repo: "hexpm", optional: false]}], "hexpm", "583b8c13697c37179f1f82443bcc7ad2f76fbc0bf4c186606eebd658f7f2631b"},
   "gettext": {:hex, :gettext, "0.18.1", "89e8499b051c7671fa60782faf24409b5d2306aa71feb43d79648a8bc63d0522", [:mix], [], "hexpm", "e70750c10a5f88cb8dc026fc28fa101529835026dec4a06dba3b614f2a99c7a9"},

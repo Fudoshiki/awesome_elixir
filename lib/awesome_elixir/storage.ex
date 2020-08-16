@@ -1,4 +1,8 @@
 defmodule AwesomeElixir.Storage do
+  def broadcast_update do
+    Phoenix.PubSub.broadcast(AwesomeElixir.PubSub, "storage", "update")
+  end
+
   def get_repos(%{"min_stars" => stars}) do
     stars_count =
       case Integer.parse(stars) do
@@ -37,16 +41,12 @@ defmodule AwesomeElixir.Storage do
     end
   end
 
-  def subscribe do
-    Phoenix.PubSub.subscribe(AwesomeElixir.PubSub, "storage")
-  end
-
-  def broadcast_update do
-    Phoenix.PubSub.broadcast(AwesomeElixir.PubSub, "storage", "update")
-  end
-
   def insert_repos(list) do
     :ets.insert(:awesome_elixir, {:list, list})
     broadcast_update()
+  end
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(AwesomeElixir.PubSub, "storage")
   end
 end

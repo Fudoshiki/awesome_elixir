@@ -33,6 +33,7 @@ defmodule AwesomeElixir.MixProject do
   defp deps do
     [
       {:earmark, "~> 1.4.10"},
+      {:faker, "~> 0.14"},
       {:floki, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.16.0"},
